@@ -2,6 +2,8 @@ import string
 import random
 
 
+# Encrypts the text with the passcode. If the passcode is None, then
+# the text is not modified
 def encode_text(text, passcode=None):
     if passcode is None:
         return text
@@ -20,6 +22,8 @@ def encode_text(text, passcode=None):
     return "".join(aux_list)
 
 
+# Decodes the text with the passcode. If the passcode is None, then
+# the text is not modified
 def decode_text(text, passcode=None):
     if passcode is None:
         return text
