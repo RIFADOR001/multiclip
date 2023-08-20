@@ -13,12 +13,13 @@ def save_data(file, data, key):
     try:
         with open(path, "r") as fl:
             my_dict = json.load(fl)
-        my_dict[key] = data
+        my_dict[key] = [data]
+        print(my_dict[key])
         with open(path, "w") as f:
             json.dump(my_dict, f)
     except FileNotFoundError:
         new_dict = dict()
-        new_dict[key] = data
+        new_dict[key] = [data]
         with open(path, "w") as f:
             json.dump(new_dict, f)
 
@@ -42,7 +43,7 @@ def load_dict(file):
 # Loads the date from the indicated key and file
 def load_data(file, key):
     my_dict = load_dict(file)
-    return my_dict[key]
+    return my_dict[key][0]
 
 
 # Deletes the data with the indicated key in the file
@@ -182,7 +183,6 @@ def create_file(file):
             waiting = False
     if answer == "yes":
         new_dict = dict()
-        print(new_dict)
         with open(path4, "w") as f:
             json.dump(new_dict, f)
         with open(path4, "w") as f:
@@ -219,6 +219,19 @@ def change_file(file):
     return file
 
 
+def add_note(file):
+    folder = "multiclipboard_files"
+    my_dict = load_dict(file)
+    key = input("Enter the key to add note: ").strip()
+    if key in my_dict.keys():
+        note = input("Write your note to add: ").strip()
+        my_dict[key].append(note)
+        path = os.path.join(folder, file)
+        with open(path, "w") as f:
+            json.dump(my_dict, f)
+    else:
+        print("The key has not been found")
+
+
 if __name__ == "__main__":
     create_file("cocoa001.json")
-

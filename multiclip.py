@@ -1,6 +1,6 @@
 from functions import *
 from termcolor import colored
-import os
+
 
 # clipboard.copy('<(")')
 # data = clipboard.paste()
@@ -18,8 +18,8 @@ def crypto_main():
     passcode = None
     # Directory and file to be used
     folder = "multiclipboard_files"
-    file = "multiclipboard.json"
-    path = os.path.join(folder, file)
+    # file = "multiclipboard.json"
+    file = "multi.json"
     # Dictironary with the commmands
     commands = commands_dict()
     # Length of the information to display
@@ -63,6 +63,8 @@ def crypto_main():
             list_files()
         # elif command == "show":
         #     print(passcode)
+        elif command == "add note":
+            add_note(file)
         else:
             print("Unknown command")
         print(colored(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", "yellow"))
@@ -72,4 +74,3 @@ if __name__ == "__main__":
     # example_main()
     # better_main()
     crypto_main()
-
