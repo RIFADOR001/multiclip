@@ -71,7 +71,7 @@ def delete_data(file, key):
 def verify_available_key(file, key):
     folder = "multiclipboard_files"
     path = os.path.join(folder, file)
-    my_dict = load_dict(path)
+    my_dict = load_dict(file)
     if key in my_dict:
         return False
     return True
@@ -107,10 +107,10 @@ def load(file, passcode=None):
 
 # Asks for a key to delete data from the file
 def delete(file):
-    folder = "multiclipboard_files"
-    path = os.path.join(folder, file)
+    # folder = "multiclipboard_files"
+    # path = os.path.join(folder, file)
     key = input("Please enter the key of the data that you want to delete...\n")
-    if not verify_available_key(path, key):
+    if not verify_available_key(file, key):
         delete_data(file, key)
         print("The data has been deleted...")
     else:
@@ -147,8 +147,7 @@ def commands_dict():
 def print_dict(my_dict, length=None):
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     for k in my_dict.keys():
-        #print(f"{k}: {my_dict[k][:length]}")
-        print(f'{colored(k, "yellow")}: {colored({my_dict[k][:length]}, "green")}')
+        print(f'{colored(k, "yellow")}: {colored(my_dict[k][:length], "green")}')
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 
@@ -224,6 +223,8 @@ def change_file(file):
     if not os.path.isfile(aux_path):
         if create_file(file):
             file = aux_file
+    else:
+        return aux_file
     return file
 
 # Main function
@@ -288,3 +289,4 @@ if __name__ == "__main__":
     # example_main()
     # better_main()
     crypto_main()
+
