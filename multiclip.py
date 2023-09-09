@@ -1,5 +1,6 @@
 from functions import *
 from termcolor import colored
+import os
 
 
 # clipboard.copy('<(")')
@@ -65,6 +66,8 @@ def crypto_main():
         #     print(passcode)
         elif command == "add note":
             add_note(file)
+        elif command == "pwd":
+            print(os.getcwd())
         else:
             print("Unknown command")
         print(colored(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", "yellow"))

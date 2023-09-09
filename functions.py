@@ -175,6 +175,9 @@ def create_file(file):
     script_dir = os.path.split(script_path)[0]  # i.e. /path/to/dir/
     path3 = os.path.join(script_dir, folder)
     path4 = os.path.join(path3, file)
+    pwd = os.getcwd()
+    path5 = os.path.join(pwd, folder)
+    path6 = os.path.join(path5, file)
     answer = None
     waiting = True
     while waiting:
@@ -183,9 +186,7 @@ def create_file(file):
             waiting = False
     if answer == "yes":
         new_dict = dict()
-        with open(path4, "w") as f:
-            json.dump(new_dict, f)
-        with open(path4, "w") as f:
+        with open(path6, "w") as f:
             json.dump(new_dict, f)
         return True
     else:
