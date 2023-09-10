@@ -2,7 +2,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_key(object):
+class Ui_NoteKey(object):
     def setupUi(self, key_dialog):
         key_dialog.setObjectName("key_dialog")
         key_dialog.resize(400, 200)
@@ -23,7 +23,7 @@ class Ui_key(object):
 
     def retranslateUi(self, key_dialog):
         _translate = QtCore.QCoreApplication.translate
-        key_dialog.setWindowTitle(_translate("key_dialog", "Dialog"))
+        key_dialog.setWindowTitle(_translate("key_dialog", "Note"))
         self.pushButton.setText(_translate("key_dialog", "Confirm"))
         self.label.setText(_translate("key_dialog", "Introduce key"))
 
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     key_dialog = QtWidgets.QDialog()
-    ui = Ui_key()
+    ui = Ui_NoteKey()
     ui.setupUi(key_dialog)
     key_dialog.show()
     sys.exit(app.exec_())

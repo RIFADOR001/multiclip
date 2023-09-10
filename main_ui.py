@@ -1,10 +1,25 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
+from PyQt5.QtWidgets import QMessageBox, QVBoxLayout, QWidget
+from save_window import Ui_Save
+from delete_key import Ui_DeleteKey
+from note_key import Ui_NoteKey
+from load_key import Ui_LoadKey
+from delete_note_key import Ui_DeleteNoteKey
+from key_dialog import Ui_key
+from confirm_delete import Ui_DeleteData
+from list import Ui_List
+from note_dialog import Ui_note
+from label_list import Ui_LabelList
+from functions import load_dict
+from ui_functions import dict_to_string
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(573, 252)
+        self.file = "multi.json"
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.list_button = QtWidgets.QPushButton(self.centralwidget)
@@ -61,6 +76,13 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.save_button.clicked.connect(lambda: self.save_window())
+        self.delete_button.clicked.connect(lambda: self.delete_window())
+        self.note_button.clicked.connect(lambda: self.note_window())
+        self.load_button.clicked.connect(lambda: self.load_window())
+        self.delete_note_button.clicked.connect(lambda: self.delete_note_window())
+        self.list_button.clicked.connect(lambda: self.list_window())
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Multiclip"))
@@ -78,6 +100,44 @@ class Ui_MainWindow(object):
         self.actionBy_key.setText(_translate("MainWindow", "By key"))
         self.actionBy_Note.setText(_translate("MainWindow", "By Note"))
         self.actionBy_content.setText(_translate("MainWindow", "By content"))
+
+    def save_window(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Save()
+        self.ui.setupUi(self.window, self.file)
+        self.window.show()
+
+    def delete_window(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_DeleteKey()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def note_window(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_NoteKey()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def load_window(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_LoadKey()
+        self.ui.setupUi(self.window, self.file)
+        self.window.show()
+
+    def delete_note_window(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_DeleteNoteKey()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def list_window(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_LabelList()
+        my_dict = load_dict(self.file)
+        text = dict_to_string(my_dict)
+        self.ui.setupUi(self.window, text)
+        self.window.show()
 
 
 if __name__ == "__main__":
