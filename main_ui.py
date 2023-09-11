@@ -110,7 +110,7 @@ class Ui_MainWindow(object):
     def delete_window(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_DeleteKey()
-        self.ui.setupUi(self.window)
+        self.ui.setupUi(self.window, self.file)
         self.window.show()
 
     def note_window(self):
