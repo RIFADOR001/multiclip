@@ -116,7 +116,7 @@ class Ui_MainWindow(object):
     def note_window(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_NoteKey()
-        self.ui.setupUi(self.window)
+        self.ui.setupUi(self.window, self.file)
         self.window.show()
 
     def load_window(self):
@@ -128,7 +128,7 @@ class Ui_MainWindow(object):
     def delete_note_window(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_DeleteNoteKey()
-        self.ui.setupUi(self.window)
+        self.ui.setupUi(self.window, self.file)
         self.window.show()
 
     def list_window(self):

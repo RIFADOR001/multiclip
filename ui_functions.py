@@ -35,4 +35,17 @@ def ui_load(file, key, passcode=None):
         print("We could not find that key. \nNo data has been loaded...")
 
 
+def ui_add_note(file, key, note):
+    folder = "multiclipboard_files"
+    my_dict = load_dict(file)
+    my_dict[key].append(note)
+    path = os.path.join(folder, file)
+    with open(path, "w") as f:
+        json.dump(my_dict, f)
+
+def ui_save_dictionary(file, dictionary, passcode=None):
+    folder = "multiclipboard_files"
+    path = os.path.join(folder, file)
+    with open(path, "w") as f:
+        json.dump(dictionary, f)
 

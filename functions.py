@@ -14,7 +14,7 @@ def save_data(file, data, key):
         with open(path, "r") as fl:
             my_dict = json.load(fl)
         my_dict[key] = [data]
-        print(my_dict[key])
+        # print(my_dict[key])
         with open(path, "w") as f:
             json.dump(my_dict, f)
     except FileNotFoundError:
