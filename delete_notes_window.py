@@ -2,6 +2,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from functions import load_dict
 from ui_functions import ui_save_dictionary
+from note_deleted_correctly import Ui_NoteDeletedDialog
 
 
 #class Ui_MainWindow(object):
@@ -62,11 +63,18 @@ class Ui_DeleteNotes(QtWidgets.QMainWindow):
     def delete_selected(self, MainWindow):
         self.checkBoxes.reverse()
         length = len(self.notes)
+        deleted = False
         for n, cb in enumerate(self.checkBoxes):
             if cb.isChecked():
                 self.my_dict[self.key].pop(length-n)
+                deleted = True
 
-        print(self.notes)
+        if deleted:
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_NoteDeletedDialog()
+            self.ui.setupUi(self.window)
+            self.window.show()
+        #print(self.notes)
         ui_save_dictionary(self.file, self.my_dict)
         MainWindow.close()
 

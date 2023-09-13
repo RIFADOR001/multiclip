@@ -3,6 +3,7 @@ from confirm_delete import Ui_DeleteData
 from key_not_found import Ui_KeyNotFound
 from functions import load_dict, delete_data
 from PyQt5.QtWidgets import QMessageBox, QVBoxLayout, QWidget, QCompleter
+from deleted_correctly import Ui_DataDeletedDialog
 
 
 class Ui_DeleteKey(object):
@@ -75,6 +76,10 @@ class Ui_DeleteKey(object):
             answer = self.show_popup()
             if answer == 0:
                 delete_data(self.file, key)
+                self.window = QtWidgets.QMainWindow()
+                self.ui = Ui_DataDeletedDialog()
+                self.ui.setupUi(self.window)
+                self.window.show()
         else:
             self.window = QtWidgets.QMainWindow()
             self.ui = Ui_KeyNotFound()
