@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from delete_notes_window import Ui_DeleteNotes
 from functions import load_dict
 from key_not_found import Ui_KeyNotFound
+from PyQt5.QtWidgets import QCompleter
 
 
 class Ui_DeleteNoteKey(object):
@@ -25,6 +26,11 @@ class Ui_DeleteNoteKey(object):
         self.retranslateUi(key_dialog)
         QtCore.QMetaObject.connectSlotsByName(key_dialog)
 
+        my_dict = load_dict(self.file)
+        keys = [k for k in my_dict.keys()]
+        completer = QCompleter(keys)
+        self.lineEdit.setCompleter(completer)
+
         self.pushButton.clicked.connect(lambda: self.confirm_key())
 
     def retranslateUi(self, key_dialog):
@@ -35,7 +41,7 @@ class Ui_DeleteNoteKey(object):
 
     def confirm_key(self):
         my_dict = load_dict(self.file)
-        key = self.lineEdit.text()
+        key = self.lineEdit.text().strip()
         if key in my_dict.keys():
             self.window = QtWidgets.QMainWindow()
             self.ui = Ui_DeleteNotes()

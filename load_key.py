@@ -4,6 +4,8 @@ from functions import load
 from ui_functions import ui_load
 from key_not_found import Ui_KeyNotFound
 from successfully_loaded import Ui_SuccessfullyLoaded
+from PyQt5.QtWidgets import QCompleter
+from functions import load_dict
 
 class Ui_LoadKey(object):
     def setupUi(self, key_dialog, file):
@@ -25,6 +27,10 @@ class Ui_LoadKey(object):
         self.retranslateUi(key_dialog)
         QtCore.QMetaObject.connectSlotsByName(key_dialog)
 
+        my_dict = load_dict(self.file)
+        keys = [k for k in my_dict.keys()]
+        completer = QCompleter(keys)
+        self.lineEdit.setCompleter(completer)
         self.pushButton.clicked.connect(lambda: self.load())
 
     def retranslateUi(self, key_dialog):
@@ -34,7 +40,7 @@ class Ui_LoadKey(object):
         self.label.setText(_translate("key_dialog", "Introduce key"))
 
     def load(self):
-        key = self.lineEdit.text()
+        key = self.lineEdit.text().strip()
         aux = ui_load(self.file, key)
         if aux == 0:
             self.window = QtWidgets.QMainWindow()

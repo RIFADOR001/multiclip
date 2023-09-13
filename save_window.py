@@ -51,7 +51,7 @@ class Ui_Save(object):
 
     def confirm(self):
         data = self.data_line.text()
-        key = self.key_line.text()
+        key = self.key_line.text().strip()
         if ui_save(self.file, data, key) == -1:
             self.error_window()
         else:
@@ -59,7 +59,7 @@ class Ui_Save(object):
 
     def paste(self):
         data = clipboard.paste()
-        key = self.key_line.text()
+        key = self.key_line.text().strip()
         if ui_save(self.file, data, key) == -1:
             self.error_window()
         else:

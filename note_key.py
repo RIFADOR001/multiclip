@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from functions import load_dict
 from key_not_found import Ui_KeyNotFound
 from note_dialog import Ui_note
+from PyQt5.QtWidgets import QCompleter
 
 
 class Ui_NoteKey(object):
@@ -25,6 +26,11 @@ class Ui_NoteKey(object):
         self.retranslateUi(key_dialog)
         QtCore.QMetaObject.connectSlotsByName(key_dialog)
 
+        my_dict = load_dict(self.file)
+        keys = [k for k in my_dict.keys()]
+        completer = QCompleter(keys)
+        self.lineEdit.setCompleter(completer)
+
         self.pushButton.clicked.connect(lambda: self.verify_note_key())
 
     def retranslateUi(self, key_dialog):
@@ -35,7 +41,7 @@ class Ui_NoteKey(object):
 
     def verify_note_key(self):
         my_dict = load_dict(self.file)
-        key = self.lineEdit.text()
+        key = self.lineEdit.text().strip()
         if key in my_dict.keys():
             self.window = QtWidgets.QMainWindow()
             self.ui = Ui_note()

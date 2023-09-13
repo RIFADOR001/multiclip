@@ -2,7 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from confirm_delete import Ui_DeleteData
 from key_not_found import Ui_KeyNotFound
 from functions import load_dict, delete_data
-from PyQt5.QtWidgets import QMessageBox, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QMessageBox, QVBoxLayout, QWidget, QCompleter
+
 
 class Ui_DeleteKey(object):
     def setupUi(self, key_dialog, file):
@@ -23,6 +24,11 @@ class Ui_DeleteKey(object):
 
         self.retranslateUi(key_dialog)
         QtCore.QMetaObject.connectSlotsByName(key_dialog)
+
+        my_dict = load_dict(self.file)
+        keys = [k for k in my_dict.keys()]
+        completer = QCompleter(keys)
+        self.lineEdit.setCompleter(completer)
 
         # self.confirmButton.clicked.connect(lambda: self.confirm_window())
         self.confirmButton.clicked.connect(lambda: self.verify_key())
@@ -59,13 +65,11 @@ class Ui_DeleteKey(object):
 
         # x = msg.exec_()
 
-
-
     def popup_button(self, button_clicked):
         print(button_clicked.text())
 
     def verify_key(self):
-        key = self.lineEdit.text()
+        key = self.lineEdit.text().strip()
         my_dict = load_dict(self.file)
         if key in my_dict.keys():
             answer = self.show_popup()
