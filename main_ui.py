@@ -12,7 +12,7 @@ from list import Ui_List
 from note_dialog import Ui_note
 from label_list import Ui_LabelList
 from functions import load_dict
-from ui_functions import dict_to_string
+from ui_functions import dict_to_string, setup
 
 
 class Ui_MainWindow(object):
@@ -90,7 +90,7 @@ class Ui_MainWindow(object):
         self.delete_button.setText(_translate("MainWindow", "Delete entry"))
         self.delete_note_button.setText(_translate("MainWindow", "Delete note"))
         self.save_button.setText(_translate("MainWindow", "Save entry"))
-        self.label.setText(_translate("MainWindow", "Current document: "))
+        # self.label.setText(_translate("MainWindow", "Current document: "))
         self.load_button.setText(_translate("MainWindow", "Load entry"))
         self.note_button.setText(_translate("MainWindow", "Note"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
@@ -142,6 +142,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+    setup()
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

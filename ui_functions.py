@@ -49,3 +49,22 @@ def ui_save_dictionary(file, dictionary, passcode=None):
     with open(path, "w") as f:
         json.dump(dictionary, f)
 
+
+# Verifies if the directory exists. If not, it will be created
+def ui_check_directory(directory, file):
+    if not os.path.isdir(directory):
+        os.mkdir(directory)
+        path = os.path.join(directory, file)
+        new_dict = dict()
+        with open(path, "w") as f:
+            json.dump(new_dict, f)
+
+
+def setup():
+    # Directory and file to be used
+    folder = "multiclipboard_files"
+    # file = "multiclipboard.json"
+    file = "multi.json"
+    # Verifies if the directory and file exist. If not, they are created
+    ui_check_directory(folder, file)
+

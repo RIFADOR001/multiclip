@@ -164,6 +164,8 @@ def check_directory(directory):
         os.mkdir(directory)
 
 
+
+
 # If the user indicates, a file will be created
 def create_file(file):
     my_path = os.path.dirname(__file__)  # <-- absolute dir the script is in
